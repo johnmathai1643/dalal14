@@ -1,0 +1,138 @@
+<html>
+<head>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+
+<?php echo $_COOKIE['PHPSESSID']; ?>
+$(document).ready(function(){
+
+
+
+var urlphp='http://www.pragyan.org/14/cms/codecharacter.php';
+
+
+$.get(urlphp,{kookie:"<?php echo $_COOKIE['PHPSESSID']; ?>"},function(returndata){
+					
+					console.log(returndata);
+					
+				});
+});
+   
+</script>
+</head>	 
+</html>
+
+<?php
+                                                                                             
+include("db.php");
+
+echo "http://www.pragyan.org/14/cms/codecharacter.php?kookie=".$_COOKIE['PHPSESSID']."";
+$r=-1;//http_get("http://www.pragyan.org/14/cms/codecharacter.php?kookie=".$_COOKIE['PHPSESSID']."");
+
+if($r==-1)
+{
+echo "Click <a href='http://www.pragyan.org'>here</a> to login first.";
+exit();
+}
+
+else
+{
+ $newuserid=0;
+$user27=$r;
+
+ $wiiw=mysql_query("SELECT * FROM `users1` WHERE `facebook_id`='$user27'");
+
+
+ if(!mysql_num_rows($wiiw))
+{
+
+	 $user2q=mysql_query("SELECT MAX(`userid`) FROM `users`");
+	 $get2=mysql_fetch_array($user2q);
+
+
+	$thequerysubo=mysql_query("SELECT `user_fullname` FROM `pragyanV3_users` WHERE `user_id`='{$user27}'");
+
+
+	if(mysql_num_rows($thequerysubo))
+	{
+		$querysubo_fetc=mysql_fetch_array($thequerysubo);
+		$thenamesubo=$querysubo_fetc[0];
+
+		 $lastuserid3=$get2[0];
+		 $newuserid=$lastuserid3+1;
+		 $password="htgjgjfghjgkg565646!!@";
+
+		 $users1q=mysql_query("INSERT INTO `users`(`userid`,`username`,`email`,`password`,`verified`,`disabled`,`cash`,`sessionid`) VALUES ('{$newuserid}','$thenamesubo','{$email}','{$password}',1,0,10000,'{$user}')");
+
+	}
+
+
+	 $users1q=mysql_query("INSERT INTO `users1`(`username`,`facebook_id`,`facebook_access_token`,`userid`) VALUES ('$thenamesubo','{$user27}','you you','{$newuserid}')");
+
+}
+
+  else
+	{
+		header('Location: http://delta.nitt.edu/~steve/dalal14/view/template/');
+		 exit();
+	}
+   
+}
+
+?>
+
+$var1="http://www.pragyan.org/14/cms/codecharacter.php?kookie=".$_COOKIE['PHPSESSID'];
+$r=file_get_contents($var1);
+
+if($r==-1)
+{
+echo "Click <a href='http://www.pragyan.org'>here</a> to login first.";
+exit();
+}
+
+else
+{
+ $newuserid=0;
+$user27=$r;
+
+ $wiiw=mysql_query("SELECT * FROM `users1` WHERE `facebook_id`='$user27'");
+
+
+ if(!mysql_num_rows($wiiw))
+{
+
+	 $user2q=mysql_query("SELECT MAX(`userid`) FROM `users`");
+	 $get2=mysql_fetch_array($user2q);
+
+
+	$thequerysubo=mysql_query("SELECT `user_fullname` FROM `pragyanV3_users` WHERE `user_id`='{$user27}'");
+
+
+	if(mysql_num_rows($thequerysubo))
+	{
+		$querysubo_fetc=mysql_fetch_array($thequerysubo);
+		$thenamesubo=$querysubo_fetc[0];
+
+		 $lastuserid3=$get2[0];
+		 $newuserid=$lastuserid3+1;
+		 $password="htgjgjfghjgkg565646!!@";
+
+		 $users1q=mysql_query("INSERT INTO `users`(`userid`,`username`,`email`,`password`,`verified`,`disabled`,`cash`,`sessionid`) VALUES ('{$newuserid}','$thenamesubo','{$email}','{$password}',1,0,10000,'{$user}')");
+
+	}
+
+
+	 $users1q=mysql_query("INSERT INTO `users1`(`username`,`facebook_id`,`facebook_access_token`,`userid`) VALUES ('$thenamesubo','{$user27}','you you','{$newuserid}')");
+
+}
+
+  else
+	{
+		header('Location: http://delta.nitt.edu/~steve/dalal14/view/template/');
+		 exit();
+	}
+   
+}
+
+?>
+
